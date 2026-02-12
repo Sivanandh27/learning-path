@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Path</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #eef1f5;
+}
+
+
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 230px;
+  height: 100vh;
+  background: #4f46e5;
+  color: white;
+  padding: 20px;
+}
+
+.navbar h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.navbar ul {
+  list-style: none;
+}
+
+.navbar li {
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.navbar li:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+
+.main {
+  margin-left: 230px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+
+.page {
+  display: none;
+  background: white;
+  width: 70%;
+  max-width: 700px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.page.active {
+  display: block;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #f4f6f8;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar">
+  <h1>LearningPath</h1>
+  <ul>
+    <li onclick="showPage('landing')">Landing</li>
+    <li onclick="showPage('login')">Login</li>
+    <li onclick="showPage('dashboard')">Dashboard</li>
+    <li onclick="showPage('paths')">Learning Paths</li>
+    <li onclick="showPage('pathDetails')">Path Details</li>
+    <li onclick="showPage('resources')">Resources</li>
+    <li onclick="showPage('notes')">Notes</li>
+    <li onclick="showPage('certificates')">Certificates</li>
+    <li onclick="showPage('analytics')">Analytics</li>
+    <li onclick="showPage('settings')">Settings</li>
+    <li onclick="showPage('help')">Help</li>
+  </ul>
+</nav>
+
+<div class="main">
+
+  <section id="landing" class="page active">
+    <h2>Personalized Learning Path</h2>
+     </p> Learn step by step with structured roadmaps.
+    </p>
+  </section>
+
+  <section id="login" class="page">
+    <h2>Login</h2>
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+  </section>
+
+  <section id="dashboard" class="page">
+    <h2>Dashboard</h2>
+    <div class="card-grid">
+      <div class="card">Current Path</div>
+      <div class="card">Progress</div>
+      <div class="card">Milestones</div>
+    </div>
+  </section>
+
+  <section id="paths" class="page">
+    <h2>Learning Paths</h2>
+    <ul>
+      <li>Frontend Developer</li>
+      <li>Backend Developer</li>
+      <li>Full Stack Developer</li>
+    </ul>
+  </section>
+
+  <section id="pathDetails" class="page">
+    <h2>Frontend Developer Path</h2>
+    <ol>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>React</li>
+    </ol>
+  </section>
+
+  <section id="resources" class="page">
+    <h2>Resources</h2>
+    <ul>
+      <li>MDN Docs</li>
+      <li>YouTube Tutorials</li>
+      <li>Practice Platforms</li>
+    </ul>
+  </section>
+
+  <section id="notes" class="page">
+    <h2>Notes</h2>
+    <textarea rows="6" placeholder="Write your notes here..."></textarea>
+  </section>
+
+  <section id="certificates" class="page">
+    <h2>Certificates</h2>
+    <p>No certificates earned yet.</p>
+  </section>
+
+  <section id="analytics" class="page">
+    <h2>Analytics</h2>
+    <p>Progress charts coming soon.</p>
+  </section>
+
+  <section id="settings" class="page">
+    <h2>Settings</h2>
+    <p>Manage account preferences.</p>
+  </section>
+
+  <section id="help" class="page">
+    <h2>Help</h2>
+    <p>Need help? Contact support.</p>
+  </section>
+
+</div>
+
+<script>
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+  document.getElementById(pageId).classList.add('active');
+}
+</script>
+
+</body>
+</html>
+
+
