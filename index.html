@@ -4,261 +4,427 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LearningPath</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ===== SIDEBAR ===== -->
 <div class="sidebar" id="sidebar">
- 
-  
-  <a onclick="showPage('dashboard'); closeSidebar()">Dashboard</a>
-  <a onclick="showPage('paths'); closeSidebar()">Learning Paths</a>
-  <a onclick="showPage('progress'); closeSidebar()">Progress Tracker</a>
-  <a onclick="showPage('details'); closeSidebar()">Learning Details</a>
-  <a onclick="showPage('resources'); closeSidebar()">Resources</a>
-  <a onclick="showPage('certificates'); closeSidebar()">Certificates</a>
-  
-  <a onclick="showPage('landing'); closeSidebar()">Logout</a>
+  <div class="sidebar-logo">
+    <span class="logo-dot"></span> LearningPath
+  </div>
+  <nav class="sidebar-nav">
+    <a onclick="showPage('dashboard'); closeSidebar()">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Dashboard
+    </a>
+    <a onclick="showPage('paths'); closeSidebar()">
+      <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Learning Paths
+    </a>
+    <a onclick="showPage('progress'); closeSidebar()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Progress Tracker
+    </a>
+    <a onclick="showPage('details'); closeSidebar()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Learning Details
+    </a>
+    <a onclick="showPage('resources'); closeSidebar()">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Resources
+    </a>
+    <a onclick="showPage('certificates'); closeSidebar()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      Certificates
+    </a>
+  </nav>
+  <a class="sidebar-logout" onclick="showPage('landing'); closeSidebar()">
+    <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    Logout
+  </a>
 </div>
 
-<nav>
-  <h1>Learning Path</h1>
-  <button onclick="showPage('login')">Login</button>
-</nav>
 
-<!-- ===== LANDING ===== -->
-<section id="landing" class="page active">
-  <div class="landing">
-    <h2>Your Personalized Learning Roadmap</h2>
-    <p>Plan, track, and achieve your learning goals with clarity.</p>
-    <button class="primary-btn" onclick="showPage('login')">Get Started</button>
+<header class="topbar" id="topbar">
+  <div class="topbar-left">
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()" style="display:none;">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="topbar-brand">
+      <span class="logo-dot"></span> LearningPath
+    </span>
   </div>
-</section>
+  <button class="login-btn" id="loginNavBtn" onclick="showPage('login')">Login</button>
+</header>
 
-<!-- ===== RESOURCES ===== -->
-<section id="resources" class="page">
-  <h2>Resources</h2>
-  <p>Collection of helpful links, articles, and downloads for your learning paths.</p>
-  <br>
-  <div class="card">
-    <h3>Reading List</h3>
-    <p>Recommended articles and documentation to supplement your learning.</p>
-    <button class="accent-btn" onclick="showPage('paths')">Explore Paths</button>
-  </div>
-</section>
 
-<!-- ===== CERTIFICATES ===== -->
-<section id="certificates" class="page">
-  <h2>Certificates</h2>
-  <p>Your earned certificates will appear here.</p>
-  <br>
-  <div class="card">
-    <h3>No certificates yet</h3>
-    <p>Complete courses to earn certificates.</p>
-    <button class="accent-btn" onclick="showPage('dashboard')">View Dashboard</button>
-  </div>
-</section>
+<main class="main-content" id="mainContent">
 
-<!-- ===== LOGIN ===== -->
-<section id="login" class="page">
-  <div class="form">
-    <h2>Login</h2>
-    <input id="loginUsername" type="text" placeholder="Username" required>
-    <input id="loginPassword" type="password" placeholder="Password" required>
-    <button class="primary-btn" onclick="handleLogin()" style="width:100%; margin-top:20px;">Login</button>
-    <div class="form-link">
-      <p>Don't have an account? <a onclick="showPage('register')">Register here</a></p>
+
+  <section id="landing" class="page active">
+    <div class="hero">
+      <div class="hero-badge">✦ Structured Learning</div>
+      <h1 class="hero-title">Your Personalized<br><em>Learning Roadmap</em></h1>
+      <p class="hero-sub">Plan, track, and achieve your learning goals with clarity and purpose.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('login')">Get Started →</button>
+        <button class="btn-ghost" onclick="showPage('paths')">Browse Paths</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>8+</strong><span>Learning Paths</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>100%</strong><span>Self-Paced</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>Free</strong><span>To Start</span></div>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== REGISTER ===== -->
-<section id="register" class="page">
-  <div class="form">
-    <h2>Register</h2>
-    
-    <input id="regUsername" type="text" placeholder="Username" required>
-    <input id="regPassword" type="password" placeholder="Password" required>
-    <input id="regConfirmPassword" type="password" placeholder="Confirm Password" required>
-    <button class="primary-btn" onclick="handleRegister()" style="width:100%; margin-top:20px;">Register</button>
-    <div class="form-link">
-      <p>Already have an account? <a onclick="showPage('login')">Login here</a></p>
+  </section>
+  <section id="login" class="page">
+    <div class="auth-layout">
+      <div class="auth-card">
+        <div class="auth-header">
+          <span class="logo-dot"></span>
+          <h2>Welcome back</h2>
+          <p>Sign in to continue your learning journey</p>
+        </div>
+        <div class="auth-body">
+          <div class="field">
+            <label>Username</label>
+            <input id="loginUsername" type="text" placeholder="Enter your username">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input id="loginPassword" type="password" placeholder="Enter your password">
+          </div>
+          <button class="btn-primary full" onclick="handleLogin()">Sign In →</button>
+          <p class="auth-switch">Don't have an account? <a onclick="showPage('register')">Register here</a></p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== DASHBOARD ===== -->
-<section id="dashboard" class="page">
-  <h2>Welcome Back</h2>
-  <p>Your personalized roadmap is ready. Continue your journey.</p>
-  <br>
 
-  <div class="grid">
-    <div class="card">
-      <p>Frontend Developer</p>
-      <p>Next Topic: JavaScript DOM</p>
-      <button class="primary-btn small-btn" onclick="showPage('paths')">Continue</button>
+  <section id="register" class="page">
+    <div class="auth-layout">
+      <div class="auth-card">
+        <div class="auth-header">
+          <span class="logo-dot"></span>
+          <h2>Create account</h2>
+          <p>Start your learning journey today</p>
+        </div>
+        <div class="auth-body">
+          <div class="field">
+            <label>Username</label>
+            <input id="regUsername" type="text" placeholder="Choose a username">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input id="regPassword" type="password" placeholder="Create a password">
+          </div>
+          <div class="field">
+            <label>Confirm Password</label>
+            <input id="regConfirmPassword" type="password" placeholder="Repeat your password">
+          </div>
+          <button class="btn-primary full" onclick="handleRegister()">Create Account →</button>
+          <p class="auth-switch">Already have an account? <a onclick="showPage('login')">Login here</a></p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>Weekly Goal</h3>
-      <p>Complete 3 Modules</p>
-      <p>Status: 2/3 Completed</p>
-    </div>
-
-    <div class="card">
-      <h3>Recommended</h3>
-      <p>Start React Basics</p>
-      <p>Based on your progress</p>
-    </div>
-  </div>
-
-  <br><br>
-
-  <div class="card">
-    <h3>Why Learning Path?</h3>
-    <p>
-      Students often feel confused about what to learn next.
-      LearningPath provides a structured roadmap that guides you
-      step-by-step toward your career goals.
-    </p>
-  </div>
-</section>
-
-<!-- ===== LEARNING PATHS ===== -->
-<section id="paths" class="page">
-  <h2>Available Learning Paths</h2>
-  <p>Choose a structured roadmap and follow step-by-step learning.</p>
-  <br>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>Frontend Developer</h3>
-      <p>HTML → CSS → JavaScript → React → Projects</p>
-      <p>Duration: 3 Months</p>
-      <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+  <section id="dashboard" class="page">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Good morning 👋</p>
+        <h2 class="page-title">Your Dashboard</h2>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Data Science</h3>
-      <p>Python → Statistics → Machine Learning → Projects</p>
-      <p>Duration: 4 Months</p>
-    <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+    <div class="dashboard-grid">
+      <div class="dash-card primary-card">
+        <div class="card-label">Current Path</div>
+        <h3>Frontend Developer</h3>
+        <p>Next Topic: <strong>JavaScript DOM</strong></p>
+        <div class="mini-progress">
+          <div class="mini-bar" style="width:60%"></div>
+        </div>
+        <span class="mini-label">60% complete</span>
+        <button class="btn-primary small" onclick="showPage('paths')">Continue →</button>
+      </div>
+
+      <div class="dash-card">
+        <div class="card-label">Weekly Goal</div>
+        <h3>Complete 3 Modules</h3>
+        <div class="goal-circles">
+          <span class="goal-dot done"></span>
+          <span class="goal-dot done"></span>
+          <span class="goal-dot"></span>
+        </div>
+        <p class="muted">2 of 3 completed</p>
+      </div>
+
+      <div class="dash-card">
+        <div class="card-label">Recommended</div>
+        <h3>React Basics</h3>
+        <p class="muted">Based on your progress</p>
+        <button class="btn-outline small" onclick="showPage('paths')">Start Now →</button>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Mobile App Development</h3>
-      <p>Java/Kotlin → Flutter → API Integration</p>
-      <p>Duration: 3 Months</p>
-      <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+    <div class="info-banner">
+      <div class="info-icon">💡</div>
+      <div>
+        <h4>Why LearningPath?</h4>
+        <p>Students often feel confused about what to learn next. LearningPath provides structured roadmaps that guide you step-by-step toward your career goals — no guesswork, just progress.</p>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section id="paths" class="page">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Explore</p>
+        <h2 class="page-title">Learning Paths</h2>
+      </div>
+    </div>
+    <p class="page-desc">Choose a structured roadmap and follow step-by-step learning.</p>
+
+    <div class="paths-grid">
+       <div class="path-card" onclick="showDetails('Frontend Developer')">
+        <div class="path-icon">🖥️</div>
+        <div class="path-tag">3 Months</div>
+        <h3>Frontend Developer</h3>
+        <p>HTML → CSS → JavaScript → React → Projects</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+
+      <div class="path-card" onclick="showDetails('data-science')">
+        <div class="path-icon">📊</div>
+        <div class="path-tag">4 Months</div>
+        <h3>Data Science</h3>
+        <p>Python → Statistics → Machine Learning → Projects</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+
+      <div class="path-card" onclick="showDetails('mobile-app-development')">
+        <div class="path-icon">📱</div>
+        <div class="path-tag">3 Months</div>
+        <h3>Mobile App Development</h3>
+        <p>Java/Kotlin → Flutter → API Integration</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+
+      <div class="path-card" onclick="showDetails('full-stack-developer')">
+        <div class="path-icon">⚡</div>
+        <div class="path-tag">6 Months</div>
+        <h3>Full Stack Developer</h3>
+        <p>Frontend → Backend → Database → Deployment</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+
+      <div class="path-card" onclick="showDetails('Backend Developer')">
+        <div class="path-icon">🔧</div>
+        <div class="path-tag">6 Months</div>
+        <h3>Backend Developer</h3>
+        <p>Python/Java/PHP → SQL/MongoDB → REST API → Frameworks</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+
+      <div class="path-card" onclick="showDetails('Cloud Computing')">
+        <div class="path-icon">☁️</div>
+        <div class="path-tag">6 Months</div>
+        <h3>Cloud Computing</h3>
+        <p>Cloud Fundamentals → AWS → Docker → Kubernetes → CI/CD</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+
+      <div class="path-card" onclick="showDetails('Cyber Security')">
+        <div class="path-icon">🛡️</div>
+        <div class="path-tag">6 Months</div>
+        <h3>Cyber Security</h3>
+        <p>Security Basics → Ethical Hacking → Firewalls → Network Security</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+
+      <div class="path-card" onclick="showDetails('Data Structures & Algorithms')">
+        <div class="path-icon">🔢</div>
+        <div class="path-tag">4 Months</div>
+        <h3>Data Structures & Algorithms</h3>
+        <p>Arrays → Linked Lists → Trees → Graphs → Sorting → Time Complexity</p>
+        <button class="btn-outline small">View Details →</button>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="details" class="page">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Course Overview</p>
+        <h2 class="page-title" id="course-title">Frontend Developer</h2>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Full Stack Developer</h3>
-      <p>Frontend → Backend → Database → Deployment</p>
-      <p>Duration: 6 Months</p>
-      <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+    <div class="details-layout">
+      <div class="details-main">
+        <div class="detail-block">
+          <p id="short-desc"><strong>Master modern web development from scratch — HTML, CSS, JavaScript, and React.</strong></p>
+        </div>
+
+        <div class="detail-block">
+          <h3>About this Path</h3>
+          <p id="long-desc">This comprehensive frontend course takes you from the basics of HTML and CSS all the way to building dynamic React applications. You'll learn how browsers work, how to write clean, semantic markup, how to style with modern CSS techniques, and how to bring pages to life with JavaScript. The final module covers React fundamentals and project deployment.</p>
+        </div>
+
+        <div class="detail-block">
+          <h3>Learning Objectives</h3>
+          <ul class="styled-list" id="objectives">
+            <li>Build structured, accessible web pages using HTML5</li>
+            <li>Style responsive layouts with Flexbox and Grid</li>
+            <li>Write interactive JavaScript and manipulate the DOM</li>
+            <li>Improve website accessibility</li>
+            <li>Deploy static websites to the web</li>
+          </ul>
+        </div>
+
+
+      <div class="details-sidebar">
+        <div class="enroll-card">
+          <h4>Ready to start?</h4>
+          <p>Join this learning path and track your progress.</p>
+          <button class="btn-primary full">Enroll Now →</button>
+          <button class="btn-ghost full" onclick="showPage('paths')">← Back to Paths</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="progress" class="page">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Overview</p>
+        <h2 class="page-title">Progress Tracker</h2>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Backend developer</h3>
-      <p>python/java/php-Sql/monodb-api/rest api/frameworks</p>
-      <p>Duration: 6 Months</p>
-      <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+    <div class="progress-list">
+      <div class="progress-item">
+        <div class="progress-meta">
+          <h3>Frontend Developer</h3>
+          <span class="progress-pct">60%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:60%"></div>
+        </div>
+        <p class="muted">9 of 15 modules complete</p>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-meta">
+          <h3>JavaScript Module</h3>
+          <span class="progress-pct">75%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:75%"></div>
+        </div>
+        <p class="muted">6 of 8 lessons complete</p>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-meta">
+          <h3>React Basics</h3>
+          <span class="progress-pct">30%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:30%"></div>
+        </div>
+        <p class="muted">3 of 10 lessons complete</p>
+      </div>
+      <div class="progress-item">
+        <div class="progress-meta">
+          <h3>cloud computing</h3>
+          <span class="progress-pct">70%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:30%"></div>
+        </div>
+        <p class="muted">4 of 10 lessons complete</p>
+      </div><div class="progress-item">
+        <div class="progress-meta">
+          <h3>mobile app developement</h3>
+          <span class="progress-pct">20%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:30%"></div>
+        </div>
+        <p class="muted">2 of 10 lessons complete</p>
+      </div><div class="progress-item">
+        <div class="progress-meta">
+          <h3>Data Science</h3>
+          <span class="progress-pct">30%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:30%"></div>
+        </div>
+        <p class="muted">5 of 10 lessons complete</p>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>cloud Computing</h3>
-      <p>Cloud Fundamentals-AWS Services-Docker-Kubernete-CI/CD-Monitoring-Security</p>
-      <p>Duration: 6 Months</p>
-      <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+
+  <section id="resources" class="page">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Library</p>
+        <h2 class="page-title">Resources</h2>
+      </div>
     </div>
-
-     <div class="card">
-      <h3>cyber security</h3>
-      <p>cyber security basics-ethical hacking-firewals-network security</p>
-      <p>Duration: 6 Months</p>
-      <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+    <p class="page-desc">Helpful links, articles, and downloads to supplement your learning paths.</p>
+    <div class="resource-cards">
+      <div class="resource-card">
+        <div class="resource-icon">📚</div>
+        <h3>Reading List</h3>
+        <p>Recommended articles and documentation to supplement your learning.</p>
+        <button class="btn-outline small" onclick="showPage('paths')">Explore Paths →</button>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">🎥</div>
+        <h3>Video Guides</h3>
+        <p>Curated video tutorials for every learning path.</p>
+        <button class="btn-outline small">Browse Videos →</button>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">📝</div>
+        <h3>Cheat Sheets</h3>
+        <p>Quick reference sheets for common topics and languages.</p>
+        <button class="btn-outline small">Download →</button>
+      </div>
     </div>
+  </section>
 
-     <div class="card">
-      <h3>Data Structures & Algorithms</h3>
-      <p>Arrays and Strings-Linked Lists-Stacks and Queues-Trees and Graphs-Sorting Algorithms-Searching Techniques-Time Complexity</p>
-       <p>Duration: 4 Months</p>
-      <button class="primary-btn small-btn" onclick="showPage('details')">View Details</button>
+
+  <section id="certificates" class="page">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Achievements</p>
+        <h2 class="page-title">Certificates</h2>
+      </div>
     </div>
-   </div>
-</section>
-
-<!-- ===== PATH DETAILS ===== -->
-<section id="details" class="page">
- <h2>shortDescription:</h2>
-      <p>"Learn how to build responsive websites using modern HTML5 and CSS3.</p>
-
-   <h2> longDescription:</h2>
-      <P>"This course provides complete training on creating professional 
-        websites using HTML5 and CSS3. Students will learn structure, 
-        layouts, responsive design, accessibility, and modern styling practices.</P>
-
-        <h2>Learning Objectives:</h2>
-        <ul>
-          <li>Understand HTML structure and semantics</li>
-          <li>Design responsive layouts using Flexbox and Grid</li>
-          <li>Create reusable CSS components</li>
-          <li>Improve website accessibility</li>
-          <li>Deploy static websites</li>
-         <h2>syllabus:</h2>
-     <ul>
-      <li>Introduction to Web Development",</li>
-      <li>HTML Elements and Forms",</li>
-      <li>CSS Selectors and Box Model"</li>
-      <li> Flexbox and Grid Layouts",</li>
-      <li>
-      Responsive Design Techniques",</li>
-     </ul>
-  
-
-</section>
-
-<!-- ===== PROGRESS ===== -->
-<section id="progress" class="page">
-  <h2>Progress Tracker</h2>
-  <br>
-
-  <div class="card">
-    <h3>Frontend Developer</h3>
-    <p>60% Completed</p>
-    <div class="progress">
-      <div class="progress-bar" style="width:60%"></div>
+    <div class="empty-state">
+      <div class="empty-icon">🏆</div>
+      <h3>No certificates yet</h3>
+      <p>Complete a learning path to earn your first certificate.</p>
+      <button class="btn-primary" onclick="showPage('paths')">Start Learning →</button>
     </div>
-  </div>
+  </section>
 
-  <br>
+</main>
 
-  <div class="card">
-    <h3>JavaScript Module</h3>
-    <p>75% Completed</p>
-    <div class="progress">
-      <div class="progress-bar" style="width:75%"></div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="card">
-    <h3>React Basics</h3>
-    <p>30% Completed</p>
-    <div class="progress">
-      <div class="progress-bar" style="width:30%"></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2026 LearningPath
+<footer class="footer" id="footer">
+  <span>© 2026 LearningPath — Built for learners.</span>
 </footer>
 
 <script src="script.js"></script>
